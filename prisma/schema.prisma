@@ -25,18 +25,17 @@ model Liscence {
   price     Float
   createdAt DateTime       @default(now())
   updatedAt DateTime       @updatedAt
-  active    Boolean        @default(false)
-  canceled  Boolean        @default(false)
   Users     UserLiscence[]
 
   @@map("liscences")
 }
 
 model UserLiscence {
-  id         Int      @id @default(autoincrement())
+  id         Int        @id @default(autoincrement())
   userId     Int
   liscenceId Int
-  startedAt  DateTime @default(now())
+  status     StatusType @default(ACTIVE)
+  startedAt  DateTime   @default(now())
   endedAt    DateTime
 
   user     User     @relation(fields: [userId], references: [id])
@@ -44,6 +43,11 @@ model UserLiscence {
 
   @@unique([userId, liscenceId, startedAt])
   @@map("user_liscences")
+}
+
+enum StatusType {
+  ACTIVE
+  INACTIVE
 }
 
 enum TypeLiscence {
