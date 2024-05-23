@@ -1,0 +1,28 @@
+{
+  "name": "smartdump-back",
+  "version": "1.0.0",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev": "nodemon src/main.ts",
+    "build": "tsc -p .",
+    "start": "node dist/main.js",
+    "prisma": "npx prisma",
+    "generate": "npx prisma generate",
+    "ppush": "npx prisma db push",
+    "migrate": "npx prisma migrate dev"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/express": "4.17.1",
+    "@types/node": "^20.12.12",
+    "nodemon": "^3.1.0",
+    "prisma": "^5.14.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@prisma/client": "^5.14.0",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
