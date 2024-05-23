@@ -8,12 +8,25 @@ datasource db {
 }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  email     String   @unique @db.VarChar(100)
-  name      String?  @db.VarChar(100)
-  password  String?  @db.Char(60)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id        Int        @id @default(autoincrement())
+  email     String     @unique @db.VarChar(100)
+  name      String?    @db.VarChar(100)
+  password  String?    @db.Char(60)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  Liscence  Liscence[]
 
   @@map("users")
+}
+
+model Liscence {
+  id        Int      @id @default(autoincrement())
+  name      String   @db.VarChar(100)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  active    Boolean  @default(false)
+  canceled  Boolean  @default(false)
+  user      User     @relation(fields: [id], references: [id])
+
+  @@map("liscences")
 }
