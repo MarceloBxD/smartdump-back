@@ -1,4 +1,7 @@
 import { userModel } from "../models/userModel";
+import bcrypt from "bcrypt";
+
+const SALT_ROUNDS = 10;
 
 const getAllUsers = async (req: any, res: any) => {
   try {
@@ -23,7 +26,12 @@ const createUser = async (req: any, res: any) => {
   try {
     const data = req.body;
 
-    const user = await userModel.createUser(data);
+    const hashedPassword = await bcrypt.hash(data.password, SALT_ROUNDS);
+
+    const user = await userModel.createUser({
+      ...data,
+      password: hashedPassword,
+    });
     res.status(201).json(user);
   } catch (error) {
     res.status(500).json({ message: error.message });
