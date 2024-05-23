@@ -37,8 +37,6 @@ export const liscenceModel = {
       data: {
         type: type,
         price: price,
-        active: true,
-        canceled: false,
       },
     });
   },
@@ -61,10 +59,6 @@ export const liscenceModel = {
         userId: userId,
         endedAt: {
           gt: new Date(),
-        },
-        liscence: {
-          active: true,
-          canceled: false,
         },
       },
       include: {
