@@ -1,0 +1,30 @@
+# API-Documentation
+# If request method is omitted, request will be treated as GET
+
+http://localhost:3000/api/users 
+
+###
+
+POST http://localhost:3000/api/users
+Content-Type: application/json
+
+{
+    "name": "Marcelo Bracet",
+    "email": "marcelo.bracet1@gmail.com",
+    "password": "marcelo123"
+}
+
+###
+
+PUT http://localhost:3000/api/users/6
+Content-Type: application/json
+
+{
+    "name": "Marcelo Bracet",
+    "email": "marcelo.bracet1@hotmail.com",
+    "password": "marcelo123"
+}
+
+###
+
+DELETE http://localhost:3000/api/users/4
