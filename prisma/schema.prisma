@@ -20,13 +20,24 @@ model User {
 }
 
 model Liscence {
-  id        Int      @id @default(autoincrement())
-  name      String   @db.VarChar(100)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  active    Boolean  @default(false)
-  canceled  Boolean  @default(false)
-  user      User     @relation(fields: [id], references: [id])
+  id        Int          @id @default(autoincrement())
+  name      String       @db.VarChar(100)
+  createdAt DateTime     @default(now())
+  updatedAt DateTime     @updatedAt
+  active    Boolean      @default(false)
+  canceled  Boolean      @default(false)
+  type      TypeLiscence @default(FREE)
+  user      User         @relation(fields: [id], references: [id])
 
   @@map("liscences")
 }
+
+enum TypeLiscence {
+  FREE
+  PREMIUM
+  VIP
+}
+
+// FREE LISCENCE FOR ALL USERS
+// PREMIUM LISCENCE FOR USERS WHO PAY R$ 19,90 (ACESSO, DOWNLOAD DE 3 PRODUTOS EXCLUSIVOS P/ SEMANA )
+// VIP LISCENCE FOR USERS WHO PAY R$ 49,90 (COMUNIDADE VIP DISCORD, SUPORTE VIP, FULL ACCESS)
