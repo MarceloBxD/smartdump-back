@@ -1,4 +1,5 @@
 import { router as userRoutes } from "./../routes/userRoutes";
+import { router as liscenceRoutes } from "./../routes/liscenceRoutes";
 import express from "express";
 import dotenv from "dotenv";
 
@@ -9,6 +10,7 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use("/api", userRoutes);
+app.use("/api", liscenceRoutes);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

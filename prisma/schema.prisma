@@ -8,28 +8,42 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
-  email     String     @unique @db.VarChar(100)
-  name      String?    @db.VarChar(100)
-  password  String?    @db.Char(60)
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  Liscence  Liscence[]
+  id        Int            @id @default(autoincrement())
+  email     String         @unique @db.VarChar(100)
+  name      String?        @db.VarChar(100)
+  password  String?        @db.Char(60)
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  Liscences UserLiscence[]
 
   @@map("users")
 }
 
 model Liscence {
-  id        Int          @id @default(autoincrement())
-  name      String       @db.VarChar(100)
-  createdAt DateTime     @default(now())
-  updatedAt DateTime     @updatedAt
-  active    Boolean      @default(false)
-  canceled  Boolean      @default(false)
-  type      TypeLiscence @default(FREE)
-  user      User         @relation(fields: [id], references: [id])
+  id        Int            @id @default(autoincrement())
+  type      TypeLiscence
+  price     Float
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+  active    Boolean        @default(false)
+  canceled  Boolean        @default(false)
+  Users     UserLiscence[]
 
   @@map("liscences")
+}
+
+model UserLiscence {
+  id         Int      @id @default(autoincrement())
+  userId     Int
+  liscenceId Int
+  startedAt  DateTime @default(now())
+  endedAt    DateTime
+
+  user     User     @relation(fields: [userId], references: [id])
+  liscence Liscence @relation(fields: [liscenceId], references: [id])
+
+  @@unique([userId, liscenceId, startedAt])
+  @@map("user_liscences")
 }
 
 enum TypeLiscence {
@@ -37,7 +51,3 @@ enum TypeLiscence {
   PREMIUM
   VIP
 }
-
-// FREE LISCENCE FOR ALL USERS
-// PREMIUM LISCENCE FOR USERS WHO PAY R$ 19,90 (ACESSO, DOWNLOAD DE 3 PRODUTOS EXCLUSIVOS P/ SEMANA )
-// VIP LISCENCE FOR USERS WHO PAY R$ 49,90 (COMUNIDADE VIP DISCORD, SUPORTE VIP, FULL ACCESS)
